@@ -1,0 +1,35 @@
+::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
+    font-size: 22px;
+    font-family: "Raleway", sans-serif;
+}
+
+::ng-deep .mat-form-field {
+    width: 40%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .mat-horizontal-stepper-content {
+    text-align: center;
+    font-size: 28px !important;
+}
+
+.flex-form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-form-buttons {
+    display: flex;
+    justify-content: flex-start;
+}
+
+::ng-deep .mat-button {
+    border-radius: 50px !important;
+    width: 60px;
+    height: 60px;
+}
+

@@ -1,0 +1,40 @@
+<div class="create-page">
+    <mat-horizontal-stepper [linear]="true" #stepper>
+        <mat-step [stepControl]="firstFormGroup" errorMessage="Title should be filled">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Describe want you want to do.</ng-template>
+                <mat-form-field>
+                    <input matInput placeholder="TODO title" formControlName="firstCtrl" required>
+                </mat-form-field>
+                <div class="flex-form-buttons">
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" errorMessage="The date shouldn't be empty" >
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Fill out start and deadline of TODO</ng-template>
+                <div class="flex-form">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="secondCtrl">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker2" placeholder="Choose a date" formControlName="thirdCtrl">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="flex-form-buttons">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext (click)="createTodo()">Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            TODO has been created!
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

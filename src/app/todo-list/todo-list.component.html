@@ -1,0 +1,68 @@
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox
+                    (click)="complete(undefined, true)"
+                    (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="row.isActual ? complete(row) : undefined"
+                              (change)="$event && row.isActual ? selection.toggle(row) : null"
+                              [checked]="row.completed"
+                              [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> TODO </th>
+            <td mat-cell class="pointer" *matCellDef="let element" (click)="element.isActual ? complete(element) : undefined">
+                <span [ngClass]="{'todo-completed': element.completed, 'not-actual': !element.isActual}">{{element.title}}</span>
+            </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="start">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Start </th>
+            <td mat-cell *matCellDef="let element"> {{element.start | date: 'dd.MM.yyyy, HH:mm'}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="deadline">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Deadline
+            </th>
+            <td mat-cell *matCellDef="let element">
+                <span [ngClass]="{'not-actual': !element.isActual}">
+                    {{element.deadline | date: 'dd.MM.yyyy, HH:mm'}}
+                </span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-mini-fab (click)="delete(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator pageSize="12" showFirstLastButtons></mat-paginator>
+</div>
+
